@@ -14,11 +14,16 @@ class logrotate::base {
     require => Package['logrotate'],
   }
 
+  if $::lsbdistcodename == trusty {
+    $logrotate_conf = 'puppet:///modules/logrotate/etc/logrotate_trusty.conf'
+  } else {
+    $logrotate_conf = 'puppet:///modules/logrotate/etc/logrotate.conf'
+  }
   file {
     '/etc/logrotate.conf':
       ensure  => file,
       mode    => '0444',
-      source  => 'puppet:///modules/logrotate/etc/logrotate.conf';
+      source  => $logrotate_conf;
     '/etc/logrotate.d':
       ensure  => directory,
       mode    => '0755';
