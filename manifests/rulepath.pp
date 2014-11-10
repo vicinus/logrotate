@@ -18,6 +18,6 @@ define logrotate::rulepath (
   concat::fragment { $name:
     target => $rule_path,
     order => $order,
-    content => $rpath,
+    content => "$rpath\n",
   }
 }
