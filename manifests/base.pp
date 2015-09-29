@@ -14,7 +14,7 @@ class logrotate::base {
     require => Package['logrotate'],
   }
 
-  if $::lsbdistcodename == trusty {
+  if $::facts['lsbdistcodename'] == trusty {
     $logrotate_conf = 'puppet:///modules/logrotate/etc/logrotate_trusty.conf'
   } else {
     $logrotate_conf = 'puppet:///modules/logrotate/etc/logrotate.conf'
