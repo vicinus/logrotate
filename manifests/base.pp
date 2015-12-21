@@ -16,6 +16,8 @@ class logrotate::base {
 
   if $::facts['lsbdistcodename'] == trusty {
     $logrotate_conf = 'puppet:///modules/logrotate/etc/logrotate_trusty.conf'
+  } elsif $::facts['osfamily'] == 'RedHat' {
+    $logrotate_conf = 'puppet:///modules/logrotate/etc/logrotate_redhat.conf'
   } else {
     $logrotate_conf = 'puppet:///modules/logrotate/etc/logrotate.conf'
   }
