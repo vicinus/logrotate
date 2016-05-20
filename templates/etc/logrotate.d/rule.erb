@@ -10,7 +10,7 @@
   if scope.to_hash.has_key?('_create')
     if @_create == 'create'
       opts << [@_create, @create_mode, @create_owner, @create_group].reject { |r|
-        r == 'undef'
+        r == nil
       }.join(' ')
     else
       opts << @_create
@@ -31,29 +31,29 @@
     'uncompresscmd'
   ].each do |key|
     value = scope.to_hash[key]
-    opts << "#{key} #{value}" if value != 'undef'
+    opts << "#{key} #{value}" if value != nil
   end
 -%>
 <%= rpath %> {
 <% opts.each do |opt| -%>
   <%= opt %>
 <% end -%>
-<% if @postrotate != 'undef' -%>
+<% if @postrotate -%>
   postrotate
     <%= @postrotate %>
   endscript
 <% end -%>
-<% if @prerotate != 'undef' -%>
+<% if @prerotate -%>
   prerotate
     <%= @prerotate %>
   endscript
 <% end -%>
-<% if @firstaction != 'undef' -%>
+<% if @firstaction -%>
   firstaction
     <%= @firstaction %>
   endscript
 <% end -%>
-<% if @lastaction != 'undef' -%>
+<% if @lastaction -%>
   lastaction
     <%= @lastaction %>
   endscript

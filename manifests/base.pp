@@ -3,7 +3,9 @@
 # Examples
 #
 #   include logrotate::base
-class logrotate::base {
+class logrotate::base (
+  $logrotate_config_template = undef,
+) {
   package { 'logrotate':
     ensure => latest,
   }
@@ -21,11 +23,12 @@ class logrotate::base {
   } else {
     $logrotate_conf = 'puppet:///modules/logrotate/etc/logrotate.conf'
   }
+  $_logrotate_conf = pick($logrotate_config_template, $logrotate_conf)
   file {
     '/etc/logrotate.conf':
       ensure  => file,
       mode    => '0444',
-      source  => $logrotate_conf;
+      source  => $_logrotate_conf;
     '/etc/logrotate.d':
       ensure  => directory,
       mode    => '0755';
