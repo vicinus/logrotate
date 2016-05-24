@@ -383,7 +383,6 @@ define logrotate::rulebody(
     group   => 'root',
     mode    => '0444',
     ensure_newline => true,
-    require => Class['logrotate::base'],
   }
   concat::fragment { "${rule_path}_body":
 #    ensure  => $ensure,
