@@ -370,7 +370,7 @@ define logrotate::rule(
   #############################################################################
   #
 
-  include logrotate::base
+  include logrotate
 
   case $rotate_every {
     'hour', 'hourly': {
